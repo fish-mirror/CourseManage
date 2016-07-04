@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.multipart.maxSize" value="104857600"/> 
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+    
+    <!-- 注册 登录登录退出 &无需登录权限的基本设置 -->
+    <package name="default" namespace="" extends="struts-default">
+    	
+        <interceptors>  
+            <interceptor name="userLogin"  class="com.zjicm.interceptor.UserInterceptor" />  
+            <interceptor name="role"  class="com.zjicm.interceptor.RoleInterceptor" />  
+            <interceptor-stack name="self-validation" >  
+                <interceptor-ref name="userLogin" />
+				<interceptor-ref name="role" />
+                <interceptor-ref name="defaultStack" />  
+            </interceptor-stack>  
+        </interceptors> 
+        <global-results>
+			<result type="redirect" name="error">/error.jsp</result>
+			<result type="redirect" name="login">/login.jsp</result>
+		</global-results>
+		<!-- 登录 -->
+        <action name="login" class="com.zjicm.action.LoginAction">
+            <result type="redirect" name="college">college/stu_manage/status_view.jsp</result>
+            <result type="redirect" name="student">student/resume/list.jsp</result>
+            <result type="redirect" name="company">company/job_manage/manage.jsp</result>
+        </action>
+        <!-- 退出 -->
+        <action name="logout" class="com.zjicm.action.LogoutAction">
+            <result type="redirect">/index.jsp</result>
+        </action>
+        <!-- 注册企业账号 -->
+        <action name="registerCompany" class="com.zjicm.action.CompanyRegisterAction">
+			<result name="imput">/login.jsp</result>
+        </action>
+        
+    </package>
+    
+    <!-- 学院 -->
+    <package name="college-stuManage" namespace="/college/stu_manage" extends="default">
+    	
+        <default-interceptor-ref name="self-validation" />  
+        
+    	<!-- 导入学生信息 -->
+        <action name="importInfo" class="com.zjicm.action.ImportStuInfoAction">
+            <result name="success">info.jsp</result>
+        </action>
+    </package>
+    <package name="college-coopManage" namespace="/college/coop_manage" extends="default">
+    	
+        <default-interceptor-ref name="self-validation" />  
+        
+        <!-- 保存合作意向 -->
+        <action name="saveIntention" class="com.zjicm.action.IntentionSaveAction">
+            <result name="success" type="redirect">manage.jsp</result>
+            <result name="input" type="redirect">publish.jsp</result>
+        </action>
+        <!-- 创建企业账号 -->
+        <action name="addCompany" class="com.zjicm.action.CompanyAddByColAction">
+            <result name="success" type="redirect">manage_com.jsp</result>
+            <result name="error">add_com.jsp</result>
+        </action>
+         <!-- 添加或更新短学期项目 -->
+        <action name="addShortTermProject" class="com.zjicm.action.ShortTermProjectAddAction">
+            <result name="success" type="redirectAction">listShortTermProject</result>
+            <result name="error" type="redirect">add_short_term.jsp</result>
+        </action>
+        <!--获得短学期项目列表-->
+        <action name="listShortTermProject" class="com.zjicm.action.ShortTermProjectListAction">
+            <result>manage_short_term.jsp</result>
+        </action>
+        <!--查看短学期项目-->
+        <action name="viewShortTermProject" class="com.zjicm.action.ShortTermProjectViewAction">
+            <result>view_short_term.jsp</result>
+        </action>
+        
+        
+    </package>
+    <package name="college-jobManage" namespace="/college/job_manage" extends="default">
+    	
+        <default-interceptor-ref name="self-validation" />  
+        
+    	<!-- 发布、编辑职位 -->
+        <action name="addJob" class="com.zjicm.action.JobAddAction">
+            <result name="success">manage.jsp</result>
+        </action>
+    </package>
+    
+    <!-- 学生 -->
+    <package name="student-resume" namespace="/student/resume" extends="default">
+    	
+        <default-interceptor-ref name="self-validation" />  
+    	<!-- 更新个人信息 -->
+        <action name="updateStuInfo" class="com.zjicm.action.UpdateStuInfo">
+            <result name="success" type="redirect">list.jsp</result>
+            <result name="error" type="redirect">personal_info.jsp</result>
+        </action>
+        <!-- 保存简历信息 -->
+        <action name="saveResume" class="com.zjicm.action.ResumeSaveAction">
+            <result name="success" type="redirect">list.jsp</result>
+            <result name="input" type="redirect">edit.jsp</result>
+        </action>
+       
+    </package>
+     <package name="student-practice" namespace="/student/practice_manage" extends="default">
+    	
+        <default-interceptor-ref name="self-validation" />  
+        
+        <!-- 发布实习周记 -->
+        <action name="addPracticeData" class="com.zjicm.action.PracticeDataAddAction">
+        	<result type="redirect">weekly.jsp</result>
+        </action>
+    </package>
+    <package name="student-shortTerm" namespace="/student/short_term_manage" extends="default">
+    	
+        <default-interceptor-ref name="self-validation" />  
+        <!--获得短学期项目列表-->
+        <action name="listShortTermProject" class="com.zjicm.action.ShortTermProjectListForSelectAction">
+            <result>short_term_list.jsp</result>
+        </action>
+        <!--获得短学期实践记录-->
+        <action name="shortTermRecords" class="com.zjicm.action.ShortTermRecordsAction">
+            <result>st_practice_record.jsp</result>
+        </action>
+        
+    </package>
+    
+    <!-- 企业 -->
+    <package name="company-jobManage" namespace="/company/job_manage" extends="default">
+    	
+        <default-interceptor-ref name="self-validation" />  
+        
+    	<!-- 发布、编辑职位 -->
+        <action name="addJob" class="com.zjicm.action.JobAddAction">
+            <result name="success">manage.jsp</result>
+        </action>
+    </package>
+    <!-- ajax获取数据的接口 -->
+    <package name="common-ajax" namespace="/common" extends="json-default">
+  		<interceptors>  
+            <interceptor name="userLogin"  class="com.zjicm.interceptor.UserInterceptor" />  
+            <interceptor name="role"  class="com.zjicm.interceptor.RoleInterceptor" />  
+            <interceptor-stack name="self-validation" >  
+                <interceptor-ref name="userLogin" />
+				<interceptor-ref name="role" />
+                <interceptor-ref name="defaultStack" />  
+            </interceptor-stack>  
+        </interceptors> 
+        <global-results>
+			<result type="json" name="error">null</result>
+			<result type="json" name="login">null</result>
+		</global-results>
+    	<!--获得合作意向信息  -->
+        <action name="getIntentionData" class="com.zjicm.action.IntentionJsonAction">
+        	<result type="json">
+        		<param name="root">intention</param>
+        	</result>
+        </action>
+    	<!--获得合作意向列表  -->
+        <action name="getIntentionList" class="com.zjicm.action.IntentionListJsonAction">
+        	<result type="json">
+        		<param name="root">intentionList</param>
+        	</result>
+        </action>
+        <!-- 获得企业列表 -->
+        <action name="getCompanyList" class="com.zjicm.action.CompanyListAction">
+        	<result type="json">
+        		<param name="root">list</param>
+        	</result>
+        </action>
+        <!-- 获得企业信息 -->
+         <action name="getCompanyData" class="com.zjicm.action.CompanyJsonAction">
+        	<result type="json">
+        		<param name="root">company</param>
+        	</result>
+        </action>
+        <!-- 获得实习数据 -->
+        <action name="getPracticeDataList" class="com.zjicm.action.PracticeDataListAction">
+        	<result type="json">
+        		<param name="root">p</param>
+        	</result>
+        </action>
+        <!-- 获得职位列表 -->
+        <action name="getJobList" class="com.zjicm.action.JobListAction">
+        	<result type="json">
+        		<param name="root">p</param>
+        	</result>
+        </action>
+        <!-- 获得招聘状态下的职位列表 -->
+        <action name="getJobRecruitList" class="com.zjicm.action.JobRecruitListAction">
+        	<result type="json">
+        		<param name="root">p</param>
+        	</result>
+        </action>
+        <!-- 获得对应公司的职位列表 -->
+        <action name="getJobByComList" class="com.zjicm.action.JobListByComAction">
+        	<result type="json">
+        		<param name="root">p</param>
+        	</result>
+        </action>
+        <!-- 获得招聘状态下的职位列表 -->
+        <action name="getJobRecruitByComList" class="com.zjicm.action.JobRecruitListByComAction">
+        	<result type="json">
+        		<param name="root">p</param>
+        	</result>
+        </action>
+    </package>
+    
+    
+    <package name="college-ajax" namespace="/college" extends="common-ajax">
+    	<default-interceptor-ref name="self-validation" />  
+        <!-- 查看学生信息 -->
+        <action name="statusInfo" class="com.zjicm.action.StudentInfoStatusAction">
+        	<result type="json">
+        		<param name="root">p</param>
+        	</result>
+        </action>
+        <!-- 返回班级列表 -->
+        <action name="getClassList" class="com.zjicm.action.ClassListAction">
+        	<result type="json">
+        		<param name="root">list</param>
+        	</result>
+        </action>
+        <action name="getMajorList" class="com.zjicm.action.MajorListAction">
+        	<result type="json">
+        		<param name="root">list</param>
+        	</result>
+        </action>
+        <!-- 返回状态分布信息 -->
+        <action name="getStatusDistri" class="com.zjicm.action.StatusDistributeAction">
+        	<result type="json">
+        		<param name="root">map</param>
+        	</result>
+        </action>
+        
+        <!--返回企业列表  -->
+        <action name="getCompanyList" class="com.zjicm.action.CompanyListAction">
+        	<result type="json">
+        		<param name="root">list</param>
+        	</result>
+        	
+        </action>
+       <!--删除合作意向  -->
+        <action name="deleteCoop" class="com.zjicm.action.CooperateDeleteAction">
+        	<result type="json">
+        		<param name="root">result</param>
+        	</result>
+        	<result name="input" type="json">
+        		<param name="root">result</param>
+        	</result>
+        </action>
+        <!--添加合作意向  -->
+        <action name="addCoop" class="com.zjicm.action.CooperateAddAction">
+        	<result type="json">
+        		<param name="root">result</param>
+        	</result>
+        	<result name="input" type="json">
+        		<param name="root">result</param>
+        	</result>
+        </action>
+         <!-- 上传短学期附件 -->
+        <action name="uploadDoc" class="com.zjicm.action.ShortTermProjectUploadAction">
+        	<result type="json">
+        		<param name="includeProperties">pid,docUrl</param>
+        	</result>
+        	<result name="error" type="json">
+        		<param name="root">result</param>
+        	</result>
+        </action>
+        <!-- 修改短学期项目状态 -->
+         <action name="updateStatus" class="com.zjicm.action.ShortTermStatusUpdateAction">
+        	<result type="json">
+        		<param name="root">shortTerm</param>
+        	</result>
+        </action>
+        <!--获得短学期项目内容-->
+        <action name="viewShortTermProject" class="com.zjicm.action.ShortTermProjectViewAction">
+            <result type="json">
+        		<param name="root">shortTerm</param>
+        	</result>
+        </action>
+        <!-- 导入短学期选课记录 -->
+        <action name="importShortTermSelected" class="com.zjicm.action.ImportShortTermSelectedAction">
+            <result type="json">
+        		<param name="root">info</param>
+        	</result>
+        </action>
+    </package>
+    
+    <package name="student-ajax" namespace="/student" extends="common-ajax">
+    	<default-interceptor-ref name="self-validation" />  
+        <!-- 上传证件照 -->
+        <action name="uploadHeadImg" class="com.zjicm.action.UploadStuHeadAction">
+        	<result type="json">
+        		<param name="root">img_url</param>
+        	</result>
+        	<result name="error" type="json">
+        		<param name="root">result</param>
+        	</result>
+        </action>
+        <!-- 获得个人信息 -->
+        <action name="getPersonalInfo" class="com.zjicm.action.PersonalInfoAction">
+        	<result type="json">
+        		<param name="root">stu</param>
+        	</result>
+        </action>
+        <!--获得简历信息  -->
+        <action name="getResumeData" class="com.zjicm.action.ResumeJsonAction">
+        	<result type="json">
+        		<param name="root">resume</param>
+        	</result>
+        </action>
+        <!--获得简历列表  -->
+        <action name="getResumeList" class="com.zjicm.action.ResumeListJsonAction">
+        	<result type="json">
+        		<param name="root">resumeList</param>
+        	</result>
+        </action>
+        <!--删除简历  -->
+        <action name="deleteResume" class="com.zjicm.action.ResumeDeleteAction">
+        	<result type="json">
+        		<param name="root">result</param>
+        	</result>
+        </action>
+        <!-- 选择短学期项目 -->
+        <action name="selectShortTermProject" class="com.zjicm.action.ShortTermProjectSelectAction">
+        	<result type="json">
+        	</result>
+        </action>
+        <!-- 取消选择短学期项目 -->
+        <action name="cancelShortTermProject" class="com.zjicm.action.ShortTermProjectCancelAction">
+        	<result type="json">
+        		<param name="root">result</param>
+        	</result>
+        </action>
+        
+    </package>
+    
+</struts>
