@@ -1,14 +1,11 @@
-<!-- 院系用户-合作意向管理-二级导航 -->
+<!-- 院系用户-二级导航 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="col-sm-3 col-md-2 sidebar">
-    <h4>系统设置</h4>
-    <ul class="nav nav-sidebar">
-        <li id="onlineList" ><a href="admin/onlineList.jsp">查看在线用户列表</a></li>
-        <li id="userList"><a href="admin/userList.jsp">查看用户信息</a></li>
-        <li id="addCollegeUser"><a href="admin/addCollegeUser.jsp">创建院系用户</a></li>
-        <li id="addStudent"><a href="admin/addStudent.jsp">创建学生用户</a></li>
-        <li id="importStudent"><a href="admin/importStudent.jsp">批量导入学生用户</a></li>
-        <li id="setStatus"><a href="setStatus.jsp">系统状态设置</a></li>
-    </ul>
+     <h4>课程管理</h4>
+     <ul class="nav nav-sidebar">
+         <li id="courseList"><a href="college/courseList.jsp">课程列表</a></li>
+         <li id="addCourse"><a href="college/addCourse.jsp">添加/编辑课程</a></li>
+         <li id="viewRecords"><a href="college/viewRecords.jsp">查看选课名单</a></li>
+     </ul>
 </div>
