@@ -40,7 +40,7 @@ HibernateTemplate hibernateTemplate;
 	 */
 	public boolean update(User u){
 		hibernateTemplate.update(u);
-		return false;
+		return true;
 	}
 	/**
 	 * 根据User对象中的用户名和密码查找数据库中是否有对应数据

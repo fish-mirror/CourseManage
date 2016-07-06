@@ -15,7 +15,7 @@
 		<!-- 采用注释的方式配置bean -->
 	<context:annotation-config />
 	<!-- 配置要扫描的包 -->
-	<context:component-scan base-package="com.zjicm" ></context:component-scan>
+	<context:component-scan base-package="zjicm.xmt130806228.*" ></context:component-scan>
 	
 	<!--proxy-target-class="true"强制使用cglib代理   如果为false则spring会自动选择-->
 	<aop:aspectj-autoproxy  proxy-target-class="true"/>
@@ -39,7 +39,11 @@
         <!-- 指定hbm文件 -->
         <property name="mappingResources">
             <list>
-                <value>zjicm/xmt130806228/entity/*.hbm.xml</value>
+                <value>zjicm/xmt130806228/entity/User.hbm.xml</value>
+                <value>zjicm/xmt130806228/entity/College.hbm.xml</value>
+                <value>zjicm/xmt130806228/entity/Student.hbm.xml</value>
+                <value>zjicm/xmt130806228/entity/Record.hbm.xml</value>
+                <value>zjicm/xmt130806228/entity/Course.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -50,5 +54,32 @@
             </props>
         </property>
     </bean>
-
+	<!-- 配置HibernateTemplate -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+	    <property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置transaction -->
+    <bean id="transactionManager"  class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <aop:config>
+        <aop:pointcut id="serviceMethods"  expression="execution(* com.zjicm.service.*Service.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
+    </aop:config>
+    
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+        	<tx:method name="login" read-only="true"/>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="pageFor*" read-only="true"/>
+            <tx:method name="search*" read-only="true"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="cancel*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
 </beans>
