@@ -1,0 +1,250 @@
+/*
+ * Base structure
+ */
+
+/*大体框架*/
+html,body,.container-fluid,.row {
+    height: 100%;
+}
+.row{
+     clear: both;
+}
+body {
+    padding-top: 90px;
+    font-family:Tahoma,Verdana,STHeiTi,simsun,sans-serif;
+}
+a{color:#ac8054;}
+a:hover,a:active,a:focus{color:#cf8054;text-decoration:none;}
+.page {
+    position: relative;
+    width:90%;
+    height: 100%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px #333;
+    max-width: 1200px;
+}
+
+@media (min-width: 767px){
+    .navbar-nav{
+        margin-top:45px; 
+        margin-left:15px;
+    }
+    .container{
+        min-width: 900px;
+    }
+    body {
+        padding-top: 110px;
+    }
+}
+
+@media (max-width: 767px) {
+    .nav-space{
+        display: none;
+    }
+    .navbar-nav{
+        margin:0 -15px;
+    }
+    .page {
+        width:100%;
+        border:0px;
+        box-shadow: none ;
+    }
+}
+
+/*一级导航*/
+.navbar-nav{
+    background: #f8f8f8;
+}
+
+@media (min-width: 767px){
+    .navbar-default .navbar-nav>.active>a,
+    .navbar-default .navbar-nav>.active>a:focus, 
+    .navbar-default .navbar-nav>.active>a:hover {
+        background:transparent;
+        height: 48px;
+        color:#ac8054;
+        border-bottom: 2px solid #ac8054;
+    }
+
+    .navbar-default .navbar-nav>li{
+        margin: 0 2px;
+    }
+    .navbar-default .navbar-nav>li>a:focus, 
+    .navbar-default .navbar-nav>li>a:hover {
+        background:transparent;
+        height: 48px;
+        color:#ac8054;
+        border-bottom: 2px solid #ac8054;
+    }
+}
+
+
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+    border: 0;
+    height: 95px;
+}
+
+/*
+ * Sidebar
+ */
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+}
+
+  .sidebar {
+    position: relative;
+    float: left;
+    width: 20%;
+    height: 100%;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+/*}*/
+
+/*侧面二级导航*/
+.nav-sidebar {
+    margin-right: -21px; /* 20px padding + 1px border */
+    margin-bottom: 20px;
+    margin-left: -20px;
+}
+.nav-sidebar > li > a {
+    padding-right: 20px;
+    padding-left: 20px;
+    color:#ac8054;
+}
+
+.nav-sidebar > li > a:hover {
+    color:#666;
+}
+
+
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+    color: #333;
+    background-color: #dedede;
+}
+
+.nav-pills a{color: #ac8054}
+.nav-pills>li.active>a, 
+.nav-pills>li.active>a:focus,
+.nav-pills>li.active>a:hover{
+    background: #ac8054;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+    position: relative;
+    float: left;
+    width: 80%;
+    padding:20px 10px;
+    margin: 0;
+
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+/*搜索列表*/
+.list-search {
+    margin: -8px 0;
+}
+
+/*按班级选择*/
+.select-class { 
+    max-height: 200px;
+    overflow: auto;
+}
+/*选择文件上传*/
+.btn-select {
+    background: #ac8054;
+    color: #fff;  
+}
+.btn-select:hover {
+    color: #fff;
+}
+
+.input-large {
+    width: 100%;
+    max-width: 300px;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid #a7a7a7;
+    margin: 5px 0;
+}
+
+.main h2 {
+    margin-top: 0px;
+    font-size: 15px;
+    height: 30px;
+    color: #666;
+    border-bottom: 1px solid #ccc;
+}
+
+.pagination {
+    float: right;
+    margin: 0;
+}
+
+.pagination>.active>a, 
+.pagination>.active>a:focus, 
+.pagination>.active>a:hover, 
+.pagination>.active>span, 
+.pagination>.active>span:focus, 
+.pagination>.active>span:hover{
+    background: #ac8054;
+    border-color: #ac8054;
+}
+
+.pagination>li>a, .pagination>li>span {
+    color: #ac8054;
+}
+.logo {
+    display: none;
+}
+.dropdown-menu{
+	max-height:150px;overflow-x:scroll
+}
+.week-record{
+	margin:10px 0;
+	padding:10px;
+	box-shadow: 2px 2px 6px #ccc;
+}
+.classname{
+	font-size: 13px;color:#666;margin-left:15px;
+}
+.content{
+	font-size: 14px;margin:10px 0;
+}
+.record-info{
+	font-size: 12px;color:#666;margin-bottom:5px;
+}
+.time{
+	margin-left:15px;
+}
+
+.solit-border{
+	padding-bottom:10px;border-bottom:1px dotted #999;
+}
