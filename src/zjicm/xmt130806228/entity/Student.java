@@ -45,7 +45,10 @@ public class Student  implements java.io.Serializable {
         this.records = records;
     }
 
-   
+    @Override
+	public String toString() {
+		return id+"\t"+name;
+	}
     // Property accessors
 
     public String getId() {

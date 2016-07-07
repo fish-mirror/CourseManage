@@ -14,7 +14,7 @@ import zjicm.xmt130806228.entity.User;
 @Component
 public class UserDao {
 
-HibernateTemplate hibernateTemplate;
+	HibernateTemplate hibernateTemplate;
 	
 	Session session;
 	private HibernateTemplate getHibernateTemplate() {
@@ -47,17 +47,18 @@ HibernateTemplate hibernateTemplate;
 	 * @param u
 	 * @return 存在返回User对象，不存在返回null
 	 */
-	public User Search(User u){
+	public User search(User u){
 		session =  hibernateTemplate.getSessionFactory().getCurrentSession();
+		System.out.println(session.isConnected());  
 		String hql = "from User where username = ? and pwd = ?";
 		Query q = session.createQuery(hql);
 		q.setString(0, u.getUsername());
 		q.setString(1,u.getPwd());
 
-		List<User> l = (List<User>)q.list();
+		List l = q.list();
 		
 		if(l.size()!= 0){
-			User user = l.get(0);
+			User user = (User)l.get(0);
 			//清除密码信息
 			user.setPwd(null);
 			return user;

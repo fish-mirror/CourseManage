@@ -10,9 +10,26 @@
     <constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
     
 
+    <!-- 注册 登录登录退出 &无需登录权限的基本设置 -->
     <package name="default" namespace="" extends="struts-default">
     	
-       
+        <global-results>
+			<result type="redirect" name="error">/error.jsp</result>
+			<result name="login">/login.jsp</result>
+		</global-results>
+		
+		<!-- 登录 -->
+        <action name="login" class="zjicm.xmt130806228.action.LoginAction">
+            <result type="redirect" name="college">college/courseList.jsp</result>
+            <result type="redirect" name="student">student/courseList.jsp</result>
+            <result type="redirect" name="admin">admin/onlineList.jsp</result>
+        </action>
+        
+        <!-- 退出 -->
+        <action name="logout" class="zjicm.xmt130806228.action.LogoutAction">
+            <result type="redirect">/login.jsp</result>
+        </action>
+        
         
     </package>
     

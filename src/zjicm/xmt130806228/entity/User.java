@@ -27,6 +27,10 @@ public class User  implements java.io.Serializable {
     	this.username = username;
     }
 
+    public User(String username, String pwd) {
+        this.username = username;
+        this.pwd = pwd;
+    }
     
     /** full constructor */
     public User(String username, String pwd, Short role) {

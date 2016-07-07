@@ -67,6 +67,14 @@ public class CollegeDao {
 		hibernateTemplate.delete(new College(id));
 		return true;
 	}
+	/**
+	 * 获得院系用户
+	 * @param id
+	 * @return
+	 */
+	public College get(String id) {
+		return hibernateTemplate.get(College.class,id);
+	}
 	
 	
 }

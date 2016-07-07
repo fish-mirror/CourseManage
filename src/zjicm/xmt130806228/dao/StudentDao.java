@@ -45,6 +45,15 @@ public class StudentDao {
 		return true;
 	}
 	/**
+	 * 得到一个学生信息
+	 * @param id
+	 * @return
+	 */
+	public Student get(String id){
+		return hibernateTemplate.get(Student.class, id);
+	}
+	
+	/**
 	 * 返回学生列表
 	 * @param offset
 	 * @param length
@@ -58,21 +67,6 @@ public class StudentDao {
 		return q.list();
 		
 	}
-	/**
-	 * 返回对应课程的学生列表
-	 * @param cid
-	 * @param offset
-	 * @param length
-	 * @return
-	 */
-	public List listByCourse(int cid,int offset, int length){
-		session = hibernateTemplate.getSessionFactory().getCurrentSession();
-		Query q = session.createQuery("from Student where cid = ?");
-		q.setInteger(0, cid);
-		q.setFirstResult(offset);
-		q.setMaxResults(length);
-		return q.list();
-	}
 
 	/**
 	 * 删除学生信息
@@ -83,6 +77,22 @@ public class StudentDao {
 		hibernateTemplate.delete(new Student(id));
 		return true;
 		
+	}
+	/**
+	 * 统计学生数量
+	 * @return
+	 */
+	public int count() {
+		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+		Query q = session.createQuery("select count(*) from Student");
+		return Integer.parseInt(q.list().get(0).toString());
+	}
+	
+	public int countByClassName(String classname) {
+		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+		Query q = session.createQuery("select count(*) from Student where classname = ?");
+		q.setString(0, classname);
+		return Integer.parseInt(q.list().get(0).toString());
 	}
 
 }

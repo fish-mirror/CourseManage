@@ -30,7 +30,12 @@
 		<property name= "maxActive"  value= "8" />  
 		<property name= "maxIdle"  value= "2" />  
 		<property name= "minIdle"  value= "2" />  
-		<property name= "maxWait"  value= "3000" />  
+		 <!--removeAbandoned: 是否自动回收超时连接-->    
+        <property name="removeAbandoned"  value="true"/>  
+        <!--removeAbandonedTimeout: 超时时间(以秒数为单位)-->    
+        <property name="removeAbandonedTimeout" value="10"/>  
+        <!--maxWait: 超时等待时间以毫秒为单位 1000等于60秒-->  
+        <property name="maxWait" value="1000"/>  
     </bean>
     
     <!-- 整合Hibernate的SessionFactory -->
@@ -58,13 +63,15 @@
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 	    <property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-	<!-- 配置transaction -->
+
+    
+    <!-- 配置transaction -->
     <bean id="transactionManager"  class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
     <aop:config>
-        <aop:pointcut id="serviceMethods"  expression="execution(* com.zjicm.service.*Service.*(..))"/>
+        <aop:pointcut id="serviceMethods"  expression="execution(* zjicm.xmt130806228.service.*Service.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
     
