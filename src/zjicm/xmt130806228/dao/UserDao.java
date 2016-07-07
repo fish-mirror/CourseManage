@@ -38,9 +38,12 @@ public class UserDao {
 	 * @param u
 	 * @return
 	 */
-	public boolean update(User u){
-		hibernateTemplate.update(u);
-		return true;
+	public void update(String id,String pwd){
+		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+		Query q = session.createQuery("update User set pwd = ? where username = ?");
+		q.setString(0, id);
+		q.setString(1, pwd);
+		q.executeUpdate();
 	}
 	/**
 	 * 根据User对象中的用户名和密码查找数据库中是否有对应数据
@@ -68,33 +71,28 @@ public class UserDao {
 	}
 	/**
 	 * 返回用户列表
-	 * @param offset
-	 * @param length
-	 * @return
-	 */
-	public List list(int offset, int length){
-		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
-		Query q = session.createQuery("from User");
-		q.setFirstResult(offset);
-		q.setMaxResults(length);
-		return q.list();
-	}
-	
-	/**
-	 * 返回对应角色的用户列表
+	 * @param partId 
 	 * @param role
 	 * @param offset
 	 * @param length
 	 * @return
 	 */
-	public List listByRole(short role,int offset, int length){
+	public List list(String partId, short role, int offset, int length){
 		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
-		Query q = session.createQuery("from User where role=?");
+		String hql = "from User where role=? ";
+		if(partId!=null){
+			hql += "and username like ?";
+		}
+		Query q = session.createQuery(hql);
 		q.setShort(0, role);
+		if(partId!=null){
+			q.setString(1, "%"+partId+"%");
+		}
 		q.setFirstResult(offset);
 		q.setMaxResults(length);
 		return q.list();
 	}
+	
 	/**
 	 * 删除用户信息
 	 * @param id
@@ -104,5 +102,19 @@ public class UserDao {
 		hibernateTemplate.delete(new User(id));
 		return true;
 		
+	}
+	
+	public int count(String partId, short role) {
+		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+		String hql = "select count(*) from User where role = ?";
+		if(partId!=null){
+			hql += "and username like ?";
+		}
+		Query q = session.createQuery(hql);
+		q.setShort(0, role);
+		if(partId!=null){
+			q.setString(1, "%"+partId+"%");
+		}
+		return Integer.parseInt(q.list().get(0).toString());
 	}
 }

@@ -23,9 +23,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <!--二级导航-->
             <%@ include file="/admin/sub_nav.jspf" %>
 
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                
-            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"> 
+      			<form action="admin/importInfo.action"  method="post" enctype="multipart/form-data"> 
+       				<input id="lefile" type="file" style="display:none" /> 
+      				<h2>批量录入学生信息（请上传xls文件）</h2> 
+       				<div class="modal-body">
+				    	<input type="file" name="xls" id="xls"  value="选择文件" />  
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<input type="submit" class="btn btn-primary" value="上传">
+					</div>
+      			</form> 
+			</div> 
         </div>
     </div>
   </body>

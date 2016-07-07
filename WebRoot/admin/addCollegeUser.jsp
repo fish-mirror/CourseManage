@@ -24,9 +24,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <%@ include file="/admin/sub_nav.jspf" %>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <form id="defaultForm" class="form-horizontal" method="post" action="college/coop_manage/addCompany.action">
+                <form id="defaultForm" class="form-horizontal" method="post" action="admin/addCollege.action">
             		<div class="form-group">
-            			<label for="id" class="col-sm-2 control-label">用户名&emsp;</label>
+            			<label for="id" class="col-sm-2 control-label">用&nbsp;&nbsp;户&nbsp;&nbsp;名</label>
 			            <div class="col-sm-10">
 			            	<input type="text" class="form-control" id="id" name="id">
 			            </div>
@@ -49,11 +49,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			            	<input type="password" class="form-control" id="repwd" name="repwd">
 			            </div>
             		</div>
-					<input type="hidden" id="institute" name="institute" value="${sessionScope.institute }">
-		            <div style="color: red;">${info} </div>
+            		<div class="form-group">
+            			<label for="institute" class="col-sm-2 control-label">学院/部门</label>
+			            <div class="col-sm-10">
+			            	<input type="text" class="form-control" id="institute" name="institute"">
+			            </div>
+            		</div>
+            		<div class="form-group">
+            			<label for="tel" class="col-sm-2 control-label">联系方式</label>
+			            <div class="col-sm-10">
+			            	<input type="text" class="form-control" id="tel" name="tel">
+			            </div>
+            		</div>
+					<div style="color: red;">${info} </div>
 	                <div class="form-group">
 	                	<div class="col-sm-offset-2 col-sm-9">
-	                    	<button type="submit" class="btn btn-default" onclick="createCom()">创建企业账号</button>
+	                    	<button type="submit" class="btn btn-default" >创建院系用户账号</button>
 		                </div>
 					</div>
 				</form>
@@ -92,7 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    stringLength: {
 	                        min: 3,
 	                        max: 9,
-	                        message: '用户名长度必须在3-9个字符之间'
+	                        message: '用户名长度必须在3-10个字符之间'
 	                    },
 	                    regexp: {
 	                        regexp: /^[a-zA-Z0-9_]+$/,
@@ -127,6 +138,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    identical: {
 	                        field: 'pwd',
 	                        message: '两次密码不一致'
+	                    }
+	                }
+	            },
+	            tel: {
+	                validators: {
+	                    regexp: {
+	                        regexp: /^[0-9]{11}$/,
+	                        message: '只能由11位数字组成的手机号码'
 	                    }
 	                }
 	            },

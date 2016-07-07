@@ -22,7 +22,7 @@
         <action name="login" class="zjicm.xmt130806228.action.LoginAction">
             <result type="redirect" name="college">college/courseList.jsp</result>
             <result type="redirect" name="student">student/courseList.jsp</result>
-            <result type="redirect" name="admin">admin/onlineList.jsp</result>
+            <result type="redirect" name="admin">admin/userList.jsp</result>
         </action>
         
         <!-- 退出 -->
@@ -32,6 +32,26 @@
         
         
     </package>
-    
+    <package name="admin" namespace="/admin" extends="default">
+    	<action name="addCollege" class="zjicm.xmt130806228.action.CollegeAddAction">
+        	<result type="redirect">userList.jsp</result>
+        	<result name="error">addCollege.jsp</result>
+        </action>
+        <action name="importInfo" class="zjicm.xmt130806228.action.StudentImportAction">
+            <result name="success">info.jsp</result>
+        </action>
+    </package>
+    <package name="admin-ajax" namespace="/admin" extends="json-default">
+    	<action name="getUserList" class="zjicm.xmt130806228.action.UserListAction">
+        	<result type="json">
+        		<param name="root">p</param>
+        	</result>
+        </action>
+        <action name="resetUser" class="zjicm.xmt130806228.action.UserEditAction">
+        	<result type="json">
+        		<param name="root">result</param>
+        	</result>
+        </action>
+    </package>
 
 </struts>
