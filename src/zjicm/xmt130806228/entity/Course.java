@@ -17,9 +17,14 @@ public class Course  implements java.io.Serializable {
 
      private Integer id;
      private String name;
-     private String type;
+     private Short type;
      private String teacher;
-     private Timestamp time;
+     private String institute;
+     private String time;
+     private String place;
+     private Double score;
+     private Integer num;
+     
      private String remark;
      private Set records = new HashSet(0);
 
@@ -36,15 +41,21 @@ public class Course  implements java.io.Serializable {
     }
     
     /** full constructor */
-    public Course(Integer id, String name, String type, String teacher, Timestamp time, String remark, Set records) {
-        this.id = id;
-        this.name = name;
-        this.type = type;
-        this.teacher = teacher;
-        this.time = time;
-        this.remark = remark;
-        this.records = records;
-    }
+    public Course(Integer id, String name, Short type, String teacher,
+			String institute, String time, String place, Double score,
+			Integer num, String remark) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.teacher = teacher;
+		this.institute = institute;
+		this.time = time;
+		this.place = place;
+		this.score = score;
+		this.num = num;
+		this.remark = remark;
+	}
 
    
     // Property accessors
@@ -52,8 +63,8 @@ public class Course  implements java.io.Serializable {
     public Integer getId() {
         return this.id;
     }
-    
-    public void setId(Integer id) {
+
+	public void setId(Integer id) {
         this.id = id;
     }
 
@@ -65,15 +76,15 @@ public class Course  implements java.io.Serializable {
         this.name = name;
     }
 
-    public String getType() {
-        return this.type;
-    }
-    
-    public void setType(String type) {
-        this.type = type;
-    }
+    public Short getType() {
+		return type;
+	}
 
-    public String getTeacher() {
+	public void setType(Short type) {
+		this.type = type;
+	}
+
+	public String getTeacher() {
         return this.teacher;
     }
     
@@ -81,15 +92,47 @@ public class Course  implements java.io.Serializable {
         this.teacher = teacher;
     }
 
-    public Timestamp getTime() {
-        return this.time;
-    }
-    
-    public void setTime(Timestamp time) {
-        this.time = time;
-    }
+    public String getInstitute() {
+		return institute;
+	}
 
-    public String getRemark() {
+	public void setInstitute(String institute) {
+		this.institute = institute;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public Double getScore() {
+		return score;
+	}
+
+	public void setScore(Double score) {
+		this.score = score;
+	}
+
+	public Integer getNum() {
+		return num;
+	}
+
+	public void setNum(Integer num) {
+		this.num = num;
+	}
+
+	public String getRemark() {
         return this.remark;
     }
     

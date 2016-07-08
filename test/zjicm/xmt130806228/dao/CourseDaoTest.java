@@ -12,49 +12,50 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-import zjicm.xmt130806228.entity.User;
+import zjicm.xmt130806228.entity.Course;
 
 
 @ContextConfiguration("classpath:beans.xml")
-public class UserDaoTest extends   
+public class CourseDaoTest extends   
 	AbstractTransactionalJUnit4SpringContextTests {
 	
 	@Autowired  
-	private UserDao userDao;
+	private CourseDao courseDao;
 	
-	User u = null;
+	Course c = null;
 
 	@Before  
     public void setUp() throws Exception {  
-		u = new User("college","123",(short)1);
+		c = new Course(null,"影视作品分析",(short)2,"濮波","电影学院","周四第6,7节{第1-16周}","下沙",1.5,40,null);
     }  
 	@After  
     public void tearDown() throws Exception {  
-        u = null;  
+        c = null;  
     }  
 	@Test
 	public void addTest() {
 		
-		boolean result = userDao.add(u);
+		boolean result = courseDao.add(c);
 		assertTrue(result);
 		
 	}
 
 	@Test
 	public void updateTest(){
-		userDao.update("admin", "123");
+		c = new Course(1,"影视作品分析",(short)2,"濮波","电影学院","周四第6,7节{第1-16周}","下沙",1.5,40,null);
+		courseDao.update(c);
 	}
 
 	@Test
 	public void listTest() {
-		List list = userDao.list(null, (short)2, 0, 6);
+		List list = courseDao.list(0, 6);
 		assertTrue(list.size()>0);
 	}
 
 	
 	@Test
 	public void deleteTest() {
-		boolean result = userDao.delete("college");
+		boolean result = courseDao.delete(1);
 		assertTrue(result);
 	}
 	

@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">   
-    <title>查看用户信息</title>
+    <title>查看选课名单</title>
 	<!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <!--你自己的样式文件 -->
@@ -16,12 +16,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <%@ include file="/admin/nav.jspf" %>
+  <%@ include file="/college/nav.jspf" %>
    <div class="container">
     <div class="container-fluid">
         <div class="row">
             <!--二级导航-->
-            <%@ include file="/admin/sub_nav.jspf" %>
+            <%@ include file="/college/sub_nav.jspf" %>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 

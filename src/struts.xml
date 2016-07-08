@@ -32,6 +32,7 @@
         
         
     </package>
+    <!-- 系统管理员 -->
     <package name="admin" namespace="/admin" extends="default">
     	<action name="addCollege" class="zjicm.xmt130806228.action.CollegeAddAction">
         	<result type="redirect">userList.jsp</result>
@@ -50,6 +51,29 @@
         <action name="resetUser" class="zjicm.xmt130806228.action.UserEditAction">
         	<result type="json">
         		<param name="root">result</param>
+        	</result>
+        </action>
+    </package>
+    <!-- 院系用户 -->
+    <package name="college" namespace="/college" extends="default">
+    	<action name="addCourse" class="zjicm.xmt130806228.action.CourseAddAction">
+        	<result type="redirect">courseList.jsp</result>
+        	<result name="error">addCourse.jsp</result>
+        </action>
+        
+    </package>
+    <package name="college-ajax" namespace="/college" extends="json-default">
+    	
+    </package>
+    <package name="common-ajax" namespace="/common" extends="json-default">
+    	<action name="getCourse" class="zjicm.xmt130806228.action.CourseGetAction">
+        	<result type="json">
+        		<param name="root">c</param>
+        	</result>
+        </action>
+        <action name="listCourse" class="zjicm.xmt130806228.action.CourseListAction">
+        	<result type="json">
+        		<param name="root">p</param>
         	</result>
         </action>
     </package>

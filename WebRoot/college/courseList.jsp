@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">   
-    <title>查看用户信息</title>
+    <title>课程列表</title>
 	<!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <!--你自己的样式文件 -->
@@ -16,15 +16,72 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <%@ include file="/admin/nav.jspf" %>
+  <%@ include file="/college/nav.jspf" %>
    <div class="container">
     <div class="container-fluid">
         <div class="row">
             <!--二级导航-->
-            <%@ include file="/admin/sub_nav.jspf" %>
+            <%@ include file="/college/sub_nav.jspf" %>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                
+            	<ul id="select_list" class="nav nav-pills"> 
+         			<!-- 课程类型 -->
+         			<li id="class_list" class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">课程类型<b class="caret"></b></a> 
+			            <ul id="class-menu" class="dropdown-menu"> 
+			            	<li><a href="javascript:;" onclick="listCourse(0,null,null,null);"></a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(1,'1',null,null);">人文社科类</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(1,'1',null,null);">公共艺术类</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(1,'1',null,null);">科学技术类</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(1,'1',null,null);">文学艺术类</a></li>
+			            </ul>
+          			</li> 
+          			
+          			<!-- 开课学院 -->
+         			<li id="class_list" class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">开课学院<b class="caret"></b></a> 
+			            <ul id="class-menu" class="dropdown-menu"> 
+			            	<li><a href="javascript:;" onclick="listCourse(2,'新媒体学院',null,null);">新媒体学院</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(2,'动画学院',null,null);">动画学院</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(2,'播音主持艺术学院',null,null);">播音主持艺术学院</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(2,'国际文化传播学院',null,null);">国际文化传播学院</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(2,'大学体育教学部',null,null);">大学体育教学部</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(2,'公共艺术教研室',null,null);">公共艺术教研室</a></li>
+			            </ul>
+          			</li> 
+          			<li><a id="item"></a></li>
+					<div style="float:right">
+			            <form class="navbar-left navbar-form" > 
+			                <input id="cname" type="text" class="form-control list-search" placeholder="搜索课程名" /> 
+			                <input type="button" class="btn" value="搜索" onclick="listCourse(5,document.getElementById('cname').value,null,null)" />
+			            </form> 
+		            </div>
+         		</ul> 
+		        <div class="table-responsive"> 
+          			<table class="table table-striped" > 
+           				<thead> 
+				            <tr> 
+					            <th width="15%">课程名</th> 
+					            <th>教师</th> 
+					            <th width="15%">上课时间</th>
+					            <th>学分</th>
+					            <th>容量</th>
+					            <th>余量</th>
+					            <th>课程类型</th>
+					            <th>校区</th>
+					            <th>开课学院</th>
+					            <th>操作</th>
+				            </tr> 
+           				</thead> 
+           				<tbody id="table"> 
+		           		
+						</tbody> 
+	          		</table> 
+	         	</div> 
+	         	<!-- 页码 -->
+         	
+		        <div class="table-bottom"> 
+			    	<ul id="pageDiv" class="pagination">
+					</ul>
+		        </div> 
             </div>
         </div>
     </div>
@@ -40,6 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//初始化界面
 	function initPage(){
 		navStyle();
+		listCourse(0,null,null,null);
 	}
 </script>  
 

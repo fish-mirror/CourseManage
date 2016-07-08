@@ -9,7 +9,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
-                <li id="admin"><a href="javascript:;">系统管理页</a></li>
+                <li id="college"><a href="javascript:;">院系管理页</a></li>
             </ul>
             <div style="float:right;padding:15px 50px 15px;margin-top:45px;">
                ${sessionScope.name}
