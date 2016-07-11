@@ -22,6 +22,9 @@ public class Record  implements java.io.Serializable {
     /** default constructor */
     public Record() {
     }
+    public Record(Integer id) {
+    	this.id = id;
+    }
 
     
     /** full constructor */

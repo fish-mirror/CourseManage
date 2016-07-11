@@ -98,14 +98,14 @@ function getUserList(partId,role,pageSize,page){
 					var li_omit = document.createElement("li");
 					li_omit.innerHTML = "<a>...</a>";
 					var li_first =  document.createElement("li");
-					li_first.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+"1)'>首页</a>";
+					li_first.innerHTML = "<a href='javascript:;' onclick='getUserList("+partId+","+role+","+pageSize+","+"1)'>首页</a>";
 					var li_tail =  document.createElement("li");
-					li_tail.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+page.totalPage+")'>尾页</a>";
+					li_tail.innerHTML = "<a href='javascript:;' onclick='getUserList("+partId+","+role+","+pageSize+","+page.totalPage+")'>尾页</a>";
 					pageDiv.appendChild(li_first);
 					//向前翻页
 					if(page.currentPage!=1){
 						var li_last =  document.createElement("li");
-						li_last.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+(page.currentPage-1)+")'>&laquo;</a>";
+						li_last.innerHTML = "<a href='javascript:;' onclick='getUserList("+partId+","+role+","+pageSize+","+(page.currentPage-1)+")'>&laquo;</a>";
 					}
 					//中间页码
 					if(page!=null){
@@ -117,7 +117,7 @@ function getUserList(partId,role,pageSize,page){
 									if(i == page.currentPage){
 										li_page.className="active";
 									}
-									li_page.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
+									li_page.innerHTML = "<a href='javascript:;' onclick='getUserList("+partId+","+role+","+pageSize+","+i+")'>"+ i +"</a>";
 									pageDiv.appendChild(li_page);
 								}
 								pageDiv.appendChild(li_omit);
@@ -128,7 +128,7 @@ function getUserList(partId,role,pageSize,page){
 									if(i == page.currentPage){
 										li_page.className="active";
 									}
-									li_page.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
+									li_page.innerHTML = "<a href='javascript:;' onclick='getUserList("+partId+","+role+","+pageSize+","+i+")'>"+ i +"</a>";
 									pageDiv.appendChild(li_page);
 								}
 							}else{
@@ -138,7 +138,7 @@ function getUserList(partId,role,pageSize,page){
 									if(i == page.currentPage){
 										li_page.className="active";
 									}
-									li_page.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
+									li_page.innerHTML = "<a href='javascript:;' onclick='getUserList("+partId+","+role+","+pageSize+","+i+")'>"+ i +"</a>";
 									pageDiv.appendChild(li_page);
 								}
 								pageDiv.appendChild(li_omit);
@@ -149,20 +149,20 @@ function getUserList(partId,role,pageSize,page){
 								if(i == page.currentPage){
 									li_page.className="active";
 								}
-								li_page.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
+								li_page.innerHTML = "<a href='javascript:;' onclick='getUserList("+partId+","+role+","+pageSize+","+i+")'>"+ i +"</a>";
 								pageDiv.appendChild(li_page);
 							}
 						}
 					}else{
 						var li_page = document.createElement("li");
 						li_page.className="active";
-						li_page.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+"1)'>1</a>";
+						li_page.innerHTML = "<a href='javascript:;' onclick='getUserList("+partId+","+role+","+pageSize+","+"1)'>1</a>";
 						pageDiv.appendChild(li_page);
 					}
 					//向后翻页
 					if(page.currentPage!=1){
 						var li_last =  document.createElement("li");
-						li_last.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+(page.currentPage+1)+")'>&raquo;</a>";
+						li_last.innerHTML = "<a href='javascript:;' onclick='getUserList("+partId+","+role+","+pageSize+","+(page.currentPage+1)+")'>&raquo;</a>";
 					}
 					pageDiv.appendChild(li_tail);
 				}
@@ -235,7 +235,7 @@ function getCourse(id){
 }
 
 //得到课程列表
-function listCourse2(kind,param,pageSize,page){
+function listCourse(kind,param,pageSize,page){
 	var request = createRequest();
 	if(request == null){
 		alert("Unable to create request");
@@ -277,7 +277,7 @@ function listCourse2(kind,param,pageSize,page){
 						var box9 = document.createElement("td");
 						var box10 = document.createElement("td");
 						
-						box1.innerHTML = item.name;
+						box1.innerHTML = "<a href='college/listStudentRecord.action?cid="+item.id+"'target='_blank' >"+item.name+"</a>";
 						line.appendChild(box1);
 						box2.innerHTML = item.teacher;
 						line.appendChild(box2);
@@ -311,14 +311,14 @@ function listCourse2(kind,param,pageSize,page){
 					var li_omit = document.createElement("li");
 					li_omit.innerHTML = "<a>...</a>";
 					var li_first =  document.createElement("li");
-					li_first.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+"1)'>首页</a>";
+					li_first.innerHTML = "<a href='javascript:;' onclick='listCourse("+kind+","+param+","+pageSize+","+"1)'>首页</a>";
 					var li_tail =  document.createElement("li");
-					li_tail.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+page.totalPage+")'>尾页</a>";
+					li_tail.innerHTML = "<a href='javascript:;' onclick='listCourse("+kind+","+param+","+pageSize+","+page.totalPage+")'>尾页</a>";
 					pageDiv.appendChild(li_first);
 					//向前翻页
 					if(page.currentPage!=1){
 						var li_last =  document.createElement("li");
-						li_last.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+(page.currentPage-1)+")'>&laquo;</a>";
+						li_last.innerHTML = "<a href='javascript:;' onclick='listCourse("+kind+","+param+","+pageSize+","+(page.currentPage-1)+")'>&laquo;</a>";
 					}
 					//中间页码
 					if(page!=null){
@@ -330,7 +330,7 @@ function listCourse2(kind,param,pageSize,page){
 									if(i == page.currentPage){
 										li_page.className="active";
 									}
-									li_page.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
+									li_page.innerHTML = "<a href='javascript:;' onclick='listCourse("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
 									pageDiv.appendChild(li_page);
 								}
 								pageDiv.appendChild(li_omit);
@@ -341,7 +341,7 @@ function listCourse2(kind,param,pageSize,page){
 									if(i == page.currentPage){
 										li_page.className="active";
 									}
-									li_page.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
+									li_page.innerHTML = "<a href='javascript:;' onclick='listCourse("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
 									pageDiv.appendChild(li_page);
 								}
 							}else{
@@ -351,7 +351,7 @@ function listCourse2(kind,param,pageSize,page){
 									if(i == page.currentPage){
 										li_page.className="active";
 									}
-									li_page.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
+									li_page.innerHTML = "<a href='javascript:;' onclick='listCourse("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
 									pageDiv.appendChild(li_page);
 								}
 								pageDiv.appendChild(li_omit);
@@ -362,7 +362,7 @@ function listCourse2(kind,param,pageSize,page){
 								if(i == page.currentPage){
 									li_page.className="active";
 								}
-								li_page.innerHTML = "<a href='javascript:;' onclick='listCourse2("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
+								li_page.innerHTML = "<a href='javascript:;' onclick='listCourse("+kind+","+param+","+pageSize+","+i+")'>"+ i +"</a>";
 								pageDiv.appendChild(li_page);
 							}
 						}
@@ -387,7 +387,15 @@ function listCourse2(kind,param,pageSize,page){
 }
 function updateSelected(name){
 	var item = document.getElementById("item");
-	
+	if(name == 1){
+		name = "人文社科类";
+	}else if(name == 2){
+		name = "公共艺术类";
+	}else if(name == 3){
+		name = "科学技术类";
+	}else if(name == 3){
+		name = "文学艺术类";
+	}
 	item.innerHTML = name;
 }
 
@@ -443,7 +451,8 @@ function listCourse2(kind,param,pageSize,page){
 						line.appendChild(box4);
 						box5.innerHTML = item.num;
 						line.appendChild(box5);
-						box6.innerHTML = (item.num - item.records.length);
+						var left = item.num - item.records.length
+						box6.innerHTML = left;
 						line.appendChild(box6);
 						switch(item.type){
 							case 1:box7.innerHTML = "人文社科类";break;
@@ -457,7 +466,12 @@ function listCourse2(kind,param,pageSize,page){
 						line.appendChild(box8);
 						box9.innerHTML = item.institute;
 						line.appendChild(box9);
-						box10.innerHTML = "<a href=''>选择</a><br/>";
+						if(left > 0){
+							box10.innerHTML = "<a href='javascript:;' onclick='selectCourse("+item.id+")'>选择</a><br/>";
+						}else{
+							box10.innerHTML = "";
+						}
+						
 						line.appendChild(box10);
 						
 						userList.appendChild(line);
@@ -540,3 +554,71 @@ function listCourse2(kind,param,pageSize,page){
 		request.send(null);
 	}
 }
+
+function deleteCourse(id){
+	var flag = confirm("是否确认删除该课程？");
+	if(flag){
+		var request = createRequest();
+		if(request == null){
+			alert("Unable to create request");
+		}else{
+			var url = "college/deleteCourse.action?id="+id;
+		};
+		request.open("GET", url + "&" + Math.random(), true);
+		request.onreadystatechange=function(){
+			if(request.readyState == 4){
+				if(request.status == 200){
+					var result = eval("(" + request.responseText + ")");
+					alert(result);
+					window.location.reload();
+				}
+			}
+		};
+		request.setRequestHeader("Cache-Control","no-cache")
+		request.send(null);
+	}
+}
+
+function selectCourse(id){
+	var request = createRequest();
+	if(request == null){
+		alert("Unable to create request");
+	}else{
+		var url = "student/selectCourse.action?cid="+id;
+	};
+	request.open("GET", url + "&" + Math.random(), true);
+	request.onreadystatechange=function(){
+		if(request.readyState == 4){
+			if(request.status == 200){
+				var result = eval("(" + request.responseText + ")");
+				alert(result);
+				window.location.reload();
+			}
+		}
+	};
+	request.setRequestHeader("Cache-Control","no-cache")
+	request.send(null);
+}
+function cancelCourse(id){
+	var flag = confirm("是否确认退选该课程？");
+	if(flag){
+		var request = createRequest();
+		if(request == null){
+			alert("Unable to create request");
+		}else{
+			var url = "student/cancelCourse.action?id="+id;
+		};
+		request.open("GET", url + "&" + Math.random(), true);
+		request.onreadystatechange=function(){
+			if(request.readyState == 4){
+				if(request.status == 200){
+					var result = eval("(" + request.responseText + ")");
+					alert(result);
+					window.location.reload();
+				}
+			}
+		};
+		request.setRequestHeader("Cache-Control","no-cache")
+		request.send(null);
+	}
+}	

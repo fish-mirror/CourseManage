@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">   
-    <title>查看用户信息</title>
+    <title>选修课课程列表</title>
 	<!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <!--你自己的样式文件 -->
@@ -16,12 +16,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <%@ include file="/admin/nav.jspf" %>
+  <%@ include file="/student/nav.jspf" %>
    <div class="container">
     <div class="container-fluid">
         <div class="row">
             <!--二级导航-->
-            <%@ include file="/admin/sub_nav.jspf" %>
+            <%@ include file="/student/sub_nav.jspf" %>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             	<ul id="select_list" class="nav nav-pills"> 
@@ -30,9 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			            <ul id="class-menu" class="dropdown-menu"> 
 			            	<li><a href="javascript:;" onclick="listCourse2(0,null,null,null);"></a></li>
 			            	<li><a href="javascript:;" onclick="listCourse2(1,'1',null,null);">人文社科类</a></li>
-			            	<li><a href="javascript:;" onclick="listCourse2(1,'1',null,null);">公共艺术类</a></li>
-			            	<li><a href="javascript:;" onclick="listCourse2(1,'1',null,null);">科学技术类</a></li>
-			            	<li><a href="javascript:;" onclick="listCourse2(1,'1',null,null);">文学艺术类</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse2(1,'2',null,null);">公共艺术类</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse2(1,'3',null,null);">科学技术类</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse2(1,'4',null,null);">文学艺术类</a></li>
 			            </ul>
           			</li> 
           			
@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div style="float:right">
 			            <form class="navbar-left navbar-form" > 
 			                <input id="cname" type="text" class="form-control list-search" placeholder="搜索课程名" /> 
-			                <input type="button" class="btn" value="搜索" onclick="listCourse(5,document.getElementById('cname').value,null,null)" />
+			                <input type="button" class="btn" value="搜索" onclick="listCourse2(5,document.getElementById('cname').value,null,null)" />
 			            </form> 
 		            </div>
          		</ul> 
@@ -97,6 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//初始化界面
 	function initPage(){
 		navStyle();
+		listCourse2(0,"",null,null);
 	}
 </script>  
 

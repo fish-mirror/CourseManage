@@ -30,9 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			            <ul id="class-menu" class="dropdown-menu"> 
 			            	<li><a href="javascript:;" onclick="listCourse(0,null,null,null);"></a></li>
 			            	<li><a href="javascript:;" onclick="listCourse(1,'1',null,null);">人文社科类</a></li>
-			            	<li><a href="javascript:;" onclick="listCourse(1,'1',null,null);">公共艺术类</a></li>
-			            	<li><a href="javascript:;" onclick="listCourse(1,'1',null,null);">科学技术类</a></li>
-			            	<li><a href="javascript:;" onclick="listCourse(1,'1',null,null);">文学艺术类</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(1,'2',null,null);">公共艺术类</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(1,'3',null,null);">科学技术类</a></li>
+			            	<li><a href="javascript:;" onclick="listCourse(1,'4',null,null);">文学艺术类</a></li>
 			            </ul>
           			</li> 
           			
@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//初始化界面
 	function initPage(){
 		navStyle();
-		listCourse(0,null,null,null);
+		listCourse(0,"",null,null);
 	}
 </script>  
 

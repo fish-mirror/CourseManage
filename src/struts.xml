@@ -29,14 +29,25 @@
         <action name="logout" class="zjicm.xmt130806228.action.LogoutAction">
             <result type="redirect">/login.jsp</result>
         </action>
-        
-        
     </package>
+	<package name="common-ajax" namespace="/common" extends="json-default">
+    	<action name="getCourse" class="zjicm.xmt130806228.action.CourseGetAction">
+        	<result type="json">
+        		<param name="root">c</param>
+        	</result>
+        </action>
+        <action name="listCourse" class="zjicm.xmt130806228.action.CourseListAction">
+        	<result type="json">
+        		<param name="root">p</param>
+        	</result>
+        </action>
+    </package>
+	
     <!-- 系统管理员 -->
     <package name="admin" namespace="/admin" extends="default">
     	<action name="addCollege" class="zjicm.xmt130806228.action.CollegeAddAction">
         	<result type="redirect">userList.jsp</result>
-        	<result name="error">addCollege.jsp</result>
+        	<result name="error">addCollegeUser.jsp</result>
         </action>
         <action name="importInfo" class="zjicm.xmt130806228.action.StudentImportAction">
             <result name="success">info.jsp</result>
@@ -60,22 +71,34 @@
         	<result type="redirect">courseList.jsp</result>
         	<result name="error">addCourse.jsp</result>
         </action>
-        
+        <action name="listStudentRecord" class="zjicm.xmt130806228.action.StudentRecordListAction">
+        	<result>viewRecords.jsp</result>
+        </action>
     </package>
     <package name="college-ajax" namespace="/college" extends="json-default">
-    	
-    </package>
-    <package name="common-ajax" namespace="/common" extends="json-default">
-    	<action name="getCourse" class="zjicm.xmt130806228.action.CourseGetAction">
+    	<action name="deleteCourse" class="zjicm.xmt130806228.action.CourseDelAction">
         	<result type="json">
         		<param name="root">c</param>
         	</result>
         </action>
-        <action name="listCourse" class="zjicm.xmt130806228.action.CourseListAction">
-        	<result type="json">
-        		<param name="root">p</param>
-        	</result>
+    </package>
+    <!-- 学生用户 -->
+	<package name="student" namespace="/student" extends="default">
+    	<action name="listStudentRecord" class="zjicm.xmt130806228.action.CourseRecordListAction">
+        	<result>recordList.jsp</result>
         </action>
     </package>
-
+    <package name="student-ajax" namespace="/student" extends="json-default">
+    	<action name="selectCourse" class="zjicm.xmt130806228.action.RecordAddAction">
+        	<result type="json">
+        		<param name="root">result</param>
+        	</result>
+        </action>
+        <action name="cancelCourse" class="zjicm.xmt130806228.action.RecordDelAction">
+        	<result type="json">
+        		<param name="root">info</param>
+        	</result>
+        </action>
+        
+    </package>
 </struts>

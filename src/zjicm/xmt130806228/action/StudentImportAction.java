@@ -95,13 +95,11 @@ public class StudentImportAction extends ActionSupport{
         	info = ss.importStu(xls);
         }catch(Exception e){
         	e.printStackTrace();
-        	//info ="导入失败！可能重复导入数据";
+        	info ="导入失败！可能重复导入数据";
         }
-        if(info==null){
-        	return ERROR;
-        }else {
-			return SUCCESS;
-		}
+        
+		return SUCCESS;
+		
         
     }
 	

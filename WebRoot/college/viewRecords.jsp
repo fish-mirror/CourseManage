@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -24,7 +25,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <%@ include file="/college/sub_nav.jspf" %>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                
+                <div class="table-responsive"> 
+          			<table class="table table-striped" > 
+           				<thead> 
+				            <tr> 
+					            <th>学号</th> 
+					            <th>姓名</th> 
+					            <th>班级</th>
+					            <th>联系方式</th>
+				            </tr> 
+           				</thead> 
+           				<tbody id="table"> 
+	           				<s:if test="list!=null">
+								<s:iterator value="list">
+									<tr> 
+							            <td><s:property value="id"/></th> 
+							            <td><s:property value="name"/></th> 
+							            <td><s:property value="classname"/></th>
+							            <td><s:property value="tel"/></th>
+						            </tr> 
+						         </s:iterator>
+						    </s:if>
+						</tbody> 
+	          		</table> 
+	         	</div> 
             </div>
         </div>
     </div>

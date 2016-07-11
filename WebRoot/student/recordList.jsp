@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">   
-    <title>查看用户信息</title>
+    <title>查看选课记录</title>
 	<!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <!--你自己的样式文件 -->
@@ -16,15 +17,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <%@ include file="/admin/nav.jspf" %>
+  <%@ include file="/student/nav.jspf" %>
    <div class="container">
     <div class="container-fluid">
         <div class="row">
             <!--二级导航-->
-            <%@ include file="/admin/sub_nav.jspf" %>
+            <%@ include file="/student/sub_nav.jspf" %>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                
+                <div class="table-responsive"> 
+					<s:if test="list!=null">
+						<s:iterator value="list">
+							 <div class="col-sm-10 solit-border">
+					          	<div class="col-sm-12">
+					          		<h4><s:property value="name"/></h4>
+					          		<div style="float:right">
+					          			<small><a href="javascript:;" onclick="cancelCourse('<s:property value="id"/>')">退选</a></small>
+					          		</div>
+					          	</div>
+					          	<div class="col-sm-6"><p>上课时间：<s:property value="time"/></p></div>
+					          	
+					         </div>
+				         </s:iterator>
+				    </s:if>
+				    <s:else>
+	         			<div id="body">还没有参与选课！</div>
+	         		</s:else>
+				</div> 
             </div>
         </div>
     </div>
